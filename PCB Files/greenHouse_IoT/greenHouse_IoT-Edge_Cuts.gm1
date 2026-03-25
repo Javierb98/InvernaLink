@@ -1,0 +1,23 @@
+G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,9.0.0*
+G04 #@! TF.CreationDate,2025-03-16T22:49:27+00:00*
+G04 #@! TF.ProjectId,Fiverr_javierbatemanar_greenHouse_IoT,46697665-7272-45f6-9a61-766965726261,rev?*
+G04 #@! TF.SameCoordinates,Original*
+G04 #@! TF.FileFunction,Profile,NP*
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 9.0.0) date 2025-03-16 22:49:27*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+G04 #@! TA.AperFunction,Profile*
+%ADD10C,0.050000*%
+G04 #@! TD*
+G04 APERTURE END LIST*
+D10*
+X117900000Y-77900000D02*
+X156200000Y-77900000D01*
+X156200000Y-137300000D01*
+X117900000Y-137300000D01*
+X117900000Y-77900000D01*
+M02*

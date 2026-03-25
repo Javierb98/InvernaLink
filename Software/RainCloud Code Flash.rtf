@@ -1,0 +1,107 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 esphome:\
+  name: sensor\
+  friendly_name: InvernaLink\
+\
+esp32:\
+  board: esp32dev\
+  framework:\
+    type: arduino\
+\
+# Define sensor pins as substitutions for easy modification\
+substitutions:\
+  tds_pin: "2"\
+  ds18b20_pin: "1"\
+  tsl2591_int_pin: "21"\
+\
+# Configure I2C for multiple sensors\
+i2c:\
+  sda: GPIO15\
+  scl: GPIO16\
+  scan: true\
+  id: bus_a\
+\
+wifi:\
+  ap:\
+    ssid: \'93InvernaLink\'94\
+    password: "12345678"\
+\
+captive_portal:\
+\
+api:\
+\
+ota:\
+  platform: esphome\
+\
+logger:\
+\
+web_server:\
+  port: 80\
+\
+# Sensors\
+sensor:\
+  # TSL2591 Light Sensor\
+  - platform: tsl2591\
+    name: "Ambient Light"\
+    id: light_sensor\
+    address: 0x29\
+    update_interval: 2s\
+    interrupt_pin: GPIO$\{tsl2591_int_pin\}\
+    unit_of_measurement: "lux"\
+\
+  # SHT45 Temperature & Humidity Sensor\
+  - platform: sht4x\
+    temperature:\
+      name: "Air Temperature"\
+    humidity:\
+      name: "Air Humidity"\
+    address: 0x44\
+    update_interval: 2s\
+\
+  # pH Sensor\
+  - platform: ads1115\
+    multiplexer: 'A0_GND'\
+    gain: 4.096\
+    name: "pH Level"\
+    update_interval: 2s\
+    unit_of_measurement: "pH"\
+    accuracy_decimals: 1\
+\
+  # SCD41 CO2, Temperature & Humidity Sensor\
+  - platform: scd4x\
+    co2:\
+      name: "CO2 Level"\
+    temperature:\
+      name: "SCD41 Temperature"\
+    humidity:\
+      name: "SCD41 Humidity"\
+    address: 0x62\
+    update_interval: 2s\
+\
+  # TDS Sensor\
+  - platform: adc\
+    pin: GPIO$\{tds_pin\}\
+    name: "TDS Level"\
+    update_interval: 2s\
+    unit_of_measurement: "ppm"\
+    accuracy_decimals: 0\
+\
+  # DS18B20 Water Temperature Sensor\
+  - platform: dallas\
+    address: 0x28\
+    pin: GPIO$\{ds18b20_pin\}\
+    name: "Water Temperature"\
+    update_interval: 60s\
+    unit_of_measurement: "\'b0C"\
+    accuracy_decimals: 1\
+\
+# Dallas OneWire Bus for DS18B20\
+dallas:\
+  - pin: GPIO$\{ds18b20_pin\}\
+}
